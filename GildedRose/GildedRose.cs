@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace GildedRoseKata;
 
@@ -13,8 +14,20 @@ public class GildedRose
 
     public void UpdateQuality()
     {
+        void UpdateQualityConjured(Item item)
+        {
+            item.SellIn--;
+            item.Quality = Math.Max(item.SellIn >= 0 ? item.Quality - 2 : item.Quality - 4, 0);
+        }
+
         for (var i = 0; i < Items.Count; i++)
         {
+            if (Items[i].Name == "Conjured Mana Cake")
+            {
+                UpdateQualityConjured(Items[i]);
+                continue;
+            }
+
             if (Items[i].Name != "Aged Brie" && Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
             {
                 if (Items[i].Quality > 0)

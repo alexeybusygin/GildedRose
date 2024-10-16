@@ -32,6 +32,13 @@ public class GildedRoseTest
     public void BackstagePassesTest_IncreasesAndThenDrops(int sellIn, int quality, int days, int expectedSellIn, int expectedQuality) =>
         TestItem("Backstage passes to a TAFKAL80ETC concert", sellIn, quality, days, expectedSellIn, expectedQuality);
 
+    [TestCase(10, 40, 3, 7, 34)]        // Decrease 2x per day
+    [TestCase(10, 40, 5, 5, 30)]
+    [TestCase(10, 40, 12, -2, 12)]      // Decrease 4x after sell-by date
+    [TestCase(10, 40, 30, -20, 0)]      // Can't be negative
+    public void ConjuredItem_DecreasesQuality2x(int sellIn, int quality, int days, int expectedSellIn, int expectedQuality) =>
+        TestItem("Conjured Mana Cake", sellIn, quality, days, expectedSellIn, expectedQuality);
+
     private static void TestItem(string name, int sellIn, int quality, int days, int expectedSellIn, int expectedQuality)
     {
         var items = new List<Item> { new() { Name = name, SellIn = sellIn, Quality = quality } };
