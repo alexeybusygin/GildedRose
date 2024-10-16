@@ -15,6 +15,7 @@ public class GildedRoseTest
 
     [TestCase(10, 20, 3, 7, 23)]
     [TestCase(10, 20, 10, 0, 30)]
+    [TestCase(10, 20, 12, -2, 34)]      // Increase 2x after sell-by date
     [TestCase(10, 20, 45, -35, 50)]     // Can't be greater than 50
     public void AgedBrieTest_IncreasesQuality(int sellIn, int quality, int days, int expectedSellIn, int expectedQuality) =>
         TestItem("Aged Brie", sellIn, quality, days, expectedSellIn, expectedQuality);
