@@ -1,20 +1,17 @@
-# Gilded Rose starting position in C# NUnit
+# Gilded Rose
 
 ## Build the project
 
-Use your normal build tools to build the projects in Debug mode.
-For example, you can use the `dotnet` command line tool:
-
 ``` cmd
-dotnet build GildedRose.sln -c Debug
+dotnet build
 ```
 
 ## Run the Gilded Rose Command-Line program
 
-For e.g. 10 days:
+The number of days is an optional parameter and can be omitted. E.g. for 10 days:
 
 ``` cmd
-GildedRose/bin/Debug/net8.0/GildedRose 10
+dotnet run --project .\GildedRose\ 10
 ```
 
 ## Run all the unit tests
