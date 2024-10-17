@@ -40,6 +40,15 @@ public class GildedRoseTest
     public void ConjuredItem_DecreasesQuality2x(int sellIn, int quality, int days, int expectedSellIn, int expectedQuality) =>
         TestItem("Conjured Mana Cake", sellIn, quality, days, expectedSellIn, expectedQuality);
 
+    [Test]
+    public void IgnoreNullEntriesTest()
+    {
+        var items = new List<Item> { null };
+
+        var app = new GildedRose(items);
+        Assert.DoesNotThrow(app.UpdateQuality);
+    }
+
     private static void TestItem(string name, int sellIn, int quality, int days, int expectedSellIn, int expectedQuality)
     {
         var items = new List<Item> { new() { Name = name, SellIn = sellIn, Quality = quality } };
@@ -48,7 +57,10 @@ public class GildedRoseTest
         for (var i = 0; i < days; i++)
             app.UpdateQuality();
 
-        Assert.That(items[0].SellIn, Is.EqualTo(expectedSellIn));
-        Assert.That(items[0].Quality, Is.EqualTo(expectedQuality));
+        Assert.Multiple(() =>
+        {
+            Assert.That(items[0].SellIn, Is.EqualTo(expectedSellIn));
+            Assert.That(items[0].Quality, Is.EqualTo(expectedQuality));
+        });
     }
 }

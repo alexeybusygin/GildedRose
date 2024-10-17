@@ -43,6 +43,9 @@ public class GildedRose
 
         for (var i = 0; i < Items.Count; i++)
         {
+            if (Items[i] == null)
+                continue;
+
             Action<Item> updateAction = Items[i].Name switch
             {
                 "Aged Brie"                                 => item => ChangeQualityAction(item, speed: -1),
